@@ -1,0 +1,99 @@
+=consensus($context: false)
+  .consensus
+    &.positions
+      +pane(202px, $single: false, $direction: left, $gutter: 10px, $header: (dark, 18px 0 0 0, 16px, 49px))
+      overflow: hidden
+      .list.positions
+        li
+          &.team
+            .locked &
+              > .content
+                padding-right: 35px
+                padding-left: 0px !important
+                width: 134px !important
+                height: 45px !important
+                background-position: center right
+    &.my-card
+      +pane(191px, $single: false, $direction: left, $gutter: 10px, $header: (normal, 11px 10px 0, 16px, 49px))
+      overflow: hidden
+      > .content
+        position: relative
+        height: auto
+        > ul
+          +border-bottom-radius
+        .positions
+          &.locked
+            position: absolute
+            top: 0px
+            left: 0px
+            padding: 3px
+            p
+              +border-top-radius(3px)
+              +text-shadow(0 1px 1px #000)
+              +background(linear-gradient(top, $bar-grey, $bar-grey 15%, rgba($bar-grey, 0)))
+              padding: 20px
+              height: 400px
+              line-height: 15px
+              font:
+                size: 12px
+                weight: bold
+              color: $soft-copy
+              text-align: center
+              .ie7 &,
+              .ie8 &
+                +background(transparent image-url('ui/chrome/legacy/gradients/list-trans-overlay.png') repeat-x)
+        
+    &.with-averages
+      +background(rgba(#000, 0.1))
+      +box-shadow(0 0 1px rgba(#000, 0.8), 0 0 5px #000 inset)
+      +border-radius
+      +float(left)
+      position: relative
+      width: 259px
+      margin-right: 10px
+      overflow: hidden
+      
+      > .picks
+        position: relative
+        z-index: 1
+        overflow: hidden
+        > .content
+          +border-bottom-right-radius
+          overflow: hidden
+        
+      > .averages
+        +border-radius
+        +border-bottom-right-radius(0px)
+        +transition(all 0.2s ease 1s)
+        +transform(translate(56px, 0px))
+        position: absolute
+        top: 0
+        left: 0
+        width: 56px
+        z-index: 0
+        overflow: hidden
+        > .content
+          +border-bottom-left-radius
+          overflow: hidden
+          
+        .done &
+          +transform(translate(0px, 0px))
+          
+      &.users
+        > .picks
+          +pane(212px, $single: false, $direction: right, $gutter: 0, $header: (blue, 18px 11px 0, 16px, 49px))
+          +box-shadow(none)
+          +border-bottom-left-radius(0px)
+        > .averages
+          > .header
+            +pane-bar($attrs:(blue-alt, 12px 0 0 6px, 13px, 49px))
+      &.experts
+        margin-right:  0px
+        
+        > .picks
+          +pane(212px, $single: false, $direction: right, $gutter: 0, $header: (red, 6px 8px 0 1px, 16px, 49px))
+          +box-shadow(none)
+          +border-bottom-left-radius(0px)
+        > .averages
+          > .header
+            +pane-bar($attrs:(red-alt, 12px 0 0 6px, 13px, 49px))

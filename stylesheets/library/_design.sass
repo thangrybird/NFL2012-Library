@@ -1,0 +1,558 @@
+$default-attrs: (normal, 0px, 100%, 24px)
+
+=panel($context: default)
+  +background-clip(padding-box)
+  +background($panel)
+  +box-shadow(0 0 5px rgba(#000, 0.9) inset)
+  +border-radius
+  padding: 1px
+  
+=headline-header
+  position: relative
+  height: 50px
+  line-height: 50px
+  #{headings()}
+    +float-left
+    +typeface(sans)
+    +text-shadow(0 1px 0 #000)
+    padding-left: 10px
+    font:
+      size: 31px
+    text-transform: uppercase
+    color: $hard-copy
+    &.title,
+    &.content
+      &.sub
+        font-size: 22px
+        color: $flat-copy
+  
+=flat-header
+  +clearfix
+  position: relative
+  height: 45px
+  line-height: 45px
+  .title,
+  .content
+    &.header
+      +float-left
+    &.social
+      +transition(opacity 1s ease 3s)
+      position: absolute
+      top: 3px
+      +opacity(0)
+      .done &
+        +opacity(1)
+  #{headings()}
+    +typeface(tech, bold)
+    padding: 0 6px
+    font:
+      size: 16px
+    text-transform: uppercase
+    color: $flat-copy
+
+
+=pane-bar($attrs: $default-attrs)
+  $box-shadow-color: $grey-header-highlight
+  $bg-gradient: linear-gradient(top, $grey-header, darken($grey-header, 8%))
+  $ie-bg: darken($grey-header, 8%) image-url('ui/chrome/legacy/gradients/panebar-header-default.png') repeat-x
+  $context: nth($attrs, 1)
+  $padding: nth($attrs, 2)
+  $headings-font-size: nth($attrs, 3)
+  $height: nth($attrs, 4)
+  $bar-typeface: tech
+  $bar-typeface-weight: bold
+  
+  $padding-top: 0
+  $padding-bottom: 0
+  
+  @if length($padding) > 1
+    $padding-top: nth($padding, 1)
+    $padding-bottom: nth($padding, 3)
+    
+  @if $context
+    @if $context == dark
+      $box-shadow-color: $dark-grey-header-highlight
+      $bg-gradient: linear-gradient(top, $dark-grey-header, darken($dark-grey-header, 8%))
+      $ie-bg: darken($dark-grey-header, 8%) image-url('ui/chrome/legacy/gradients/panebar-header-dark.png') repeat-x
+    @if $context == blue
+      $box-shadow-color: lighten($d-blue, 8%)
+      $bg-gradient: linear-gradient(top, lighten($d-blue, 4%), $d-blue-alt)
+      $ie-bg: $d-blue-alt image-url('ui/chrome/legacy/gradients/panebar-header-blue.png') repeat-x
+    @if $context == red
+      $box-shadow-color: lighten($nfl-red, 8%)
+      $bg-gradient: linear-gradient(top, $nfl-red, darken($nfl-red, 8%))
+      $ie-bg: darken($nfl-red, 8%) image-url('ui/chrome/legacy/gradients/panebar-header-red.png') repeat-x
+    @if $context == blue-alt
+      $box-shadow-color: #1F77C0
+      $bg-gradient: linear-gradient(top, #175889, #0F3D6E)
+      $ie-bg: #0F3D6E image-url('ui/chrome/legacy/gradients/panebar-header-blue.png') 0 -49px repeat-x
+    @if $context == red-alt
+      $box-shadow-color: #7F1424
+      $bg-gradient: linear-gradient(top, #6F0011, #48000C)
+      $ie-bg: #48000C image-url('ui/chrome/legacy/gradients/panebar-header-red.png') 0 -49px repeat-x
+    @if $context == alt
+      $bar-typeface: sans
+      $bar-typeface-weight: normal
+    @if $context == modal or $context == modal-footer or $context == entry-bar
+      $box-shadow-color: #d4d4d4
+      $bg-gradient: linear-gradient(top, #979797, #6b6b6b)
+      $ie-bg: #6b6b6b image-url('ui/chrome/legacy/gradients/panebar-header-modal.png') repeat-x
+    @if $context == footer or $context == modal-footer
+      +border-bottom-radius
+    @else
+      +border-top-radius
+      
+  +box-shadow(0 1px 0 $box-shadow-color inset)
+  +background($bg-gradient)
+  padding: $padding
+  height: calculated-height($height, $padding-top + $padding-bottom)
+  border-bottom: 1px solid #000
+  .ie7 &,
+  .ie8 &
+    +background($ie-bg)
+  
+  @if $context == modal-footer
+    border-bottom: 0px !important
+  
+  .title,
+  .content
+    +clearfix
+    +typeface(#{$bar-typeface}, #{$bar-typeface-weight})
+    display: block
+    #{headings()}
+      +float-left
+      +text-shadow(0 -1px 0 darken($box-shadow-color, 12%))
+      font-size: $headings-font-size
+      line-height: $headings-font-size
+      @if $context != alt
+        text-transform: uppercase
+      color: $hard-copy
+      &.sub
+        +float-right
+        font-size: $headings-font-size - 3
+        color: $flat-copy
+        .is-mobile &
+          +float-left
+          font-size: $headings-font-size
+          margin-left: 10px
+        @if $context == entry-bar
+          font-size: $headings-font-size
+          color: $soft-copy
+        @else
+          font-size: $headings-font-size - 3
+          color: $flat-copy
+          
+    &.centered
+      #{headings()}
+        display: block
+        float: none
+        text-align: center
+    &.tool
+      +float-right
+      a
+        font-size: $headings-font-size
+        text-transform: uppercase
+        color: $hard-copy
+  p
+    margin-top: 6px
+    font-size: 10px
+    line-height: 13px
+    font-weight: bold
+    color: $soft-copy
+    .is-mobile &
+      +typeface(sans, bold)
+      margin-top: 5px
+      font-size: 11px
+      text-transform: uppercase
+      color: $flat-copy
+  a
+    &.link-out
+      @if $context
+        @if $context != normal
+          +link-colors(#eacdd1, $hard-copy)
+        @else
+          +link-colors($soft-copy, $hard-copy)
+          
+      +typeface(sans, bold)
+      display: inline-block
+      margin-top: 6px
+      font-size: 10px
+      line-height: 13px
+      text:
+        decoration: none
+        transform: uppercase
+        
+  &.has-icon
+    > .icon
+      margin-right: 5px
+      width: 38px
+      height: 38px
+    > .icon,
+    > .title
+      +float-left
+    > .title
+      margin-top: 4px
+      
+  .is-mobile &
+    +border-radius(0px)
+    &.has-back-button
+      padding-left: 70px
+    a
+      &.back
+        +text-shadow(0 1px 3px $bar-grey-stub)
+        +typeface(sans)
+        +border-image(image-url("ui/chrome/mobile/h/back-button.png") 2 7 2 19)
+        position: absolute
+        top: 8px
+        left: 3px
+        border-width: 1px 3px 1px 9px
+        height: 34px
+        line-height: 34px
+        font-size: 18px
+        min-width: 45px
+        text-align: center
+        text-transform: uppercase
+        color: $flat-copy
+        &:active
+          color: $hard-copy
+      
+=list-item($context: false)
+  $ordinal-box-shadow: 0 1px 0 $list-item-ordinal-highlight inset
+  $ordinal-bg: linear-gradient(top, lighten($list-item-ordinal, 16%), $list-item-ordinal)
+  $ie-ordinal-bg: $list-item-ordinal image-url('ui/chrome/legacy/gradients/list-item-ordinal-default.png') repeat-x
+  $item-box-shadow: 0 1px 0 $list-item-border-highlight inset
+  $item-border: $list-item-border
+  $item-bg: linear-gradient(top, $list-item, darken($list-item, 1%))
+  $ie-item-bg: darken($list-item, 1%) image-url('ui/chrome/legacy/gradients/list-item-default.png') repeat-x
+  $mobile-item-bg: image-url('ui/chrome/mobile/l/list-item-arrow.png') 95% center no-repeat, linear-gradient(top, $list-item, darken($list-item, 4%))
+  $mobile-item-hi-bg: image-url('ui/chrome/mobile/h/list-item-arrow.png') 95% center no-repeat, linear-gradient(top, $list-item, darken($list-item, 4%))
+  $mobile-item-hi-bg-size: 7px 13px, 100% 100%
+  $ordinal-border-width: 1px
+  
+  @if $context
+    @if $context == reflective
+      $item-box-shadow: none
+      $item-bg: linear-gradient(top, #2B2B2B, #2B2C2B, #2B2C2B 50%, #202020 51%, #202020, #181818)
+      $ordinal-bg: $item-bg
+      $ordinal-box-shadow: none
+      $ordinal-border-width: 0px
+      $mobile-item-bg: $item-bg
+      $ie-item-bg: #181818 image-url('ui/chrome/legacy/gradients/list-item-reflective.png') repeat-x
+      $ie-ordinal-bg: $ie-item-bg
+    @if $context == my-card-standalone
+      $item-box-shadow: $ordinal-box-shadow
+      $item-bg: $ordinal-bg
+      $ie-item-bg: $ie-ordinal-bg
+      $mobile-item-bg: $item-bg
+    @if $context == is-average
+      $item-bg: #191919
+      $item-box-shadow: 0 1px 0 lighten($item-bg, 4%) inset
+      $item-border: darken($item-bg, 2%)
+      $mobile-item-bg: $item-bg
+      $ie-item-bg: #191919
+    @if $context == hover
+      $item-bg: linear-gradient(top, darken($bar-grey, 4%), $bar-grey 10%, $bar-grey, $bar-grey 90%, darken($bar-grey, 4%))
+      $item-box-shadow: none
+      $ie-item-bg: $bar-grey image-url('ui/chrome/legacy/gradients/list-item-hover.png') repeat-x
+      
+    @if $context == standard
+      $mobile-item-bg: $item-bg
+      
+    @if $context == mobile-filled
+      $item-box-shadow: none
+      $mobile-item-bg: image-url('ui/chrome/mobile/l/list-check.png') 97% center no-repeat, linear-gradient(top, #373737, #282828)
+      $mobile-item-hi-bg: image-url('ui/chrome/mobile/h/list-check.png') 97% center no-repeat, linear-gradient(top, #373737, #282828)
+      $mobile-item-hi-bg-size: 21px 21px, 100% 100%
+      
+  +background($item-bg)
+  +box-shadow($item-box-shadow)
+  line-height: 45px
+  height: 45px
+  border-bottom: 1px solid $item-border
+  > .content
+    height: 45px
+  .ie7 &,
+  .ie8 &
+    +background($ie-item-bg)
+  .is-mobile &
+    +background($mobile-item-bg)
+    +box-shadow(none)
+    border-bottom: 2px solid lighten($list-item, 12%)
+    line-height: 51px
+    height: 51px
+    > .content
+      height: 51px
+      
+    @if $mobile-item-bg != $item-bg
+      @media screen and (-webkit-device-pixel-ratio: 2)
+        +background($mobile-item-hi-bg)
+        +background-size($mobile-item-hi-bg-size)
+    
+  @if $context
+    @if $context == is-average
+      width: 47px
+      font:
+        size: 13px
+      text-align: center
+      
+  > span
+    display: inline-block
+    border:
+      style: solid
+      color: $list-item-border
+    vertical-align: top
+    .is-mobile &
+      vertical-align: middle
+    
+    &.ordinal
+      +box-shadow($ordinal-box-shadow)
+      +background($ordinal-bg)
+      width: 25px
+      border-right-width: $ordinal-border-width
+      font:
+        size: 13px
+      text:
+        align: center
+      .ie7 &,
+      .ie8 &
+        +background($ie-ordinal-bg)
+        
+      .is-mobile &
+        +box-shadow(none)
+        +background(none)
+        width: 28px
+        border-width: 0px
+        font-size: 18px
+  &:last-child
+    border-bottom-width: 0px
+        
+=pane($width: 100%, $single: true, $direction: left, $gutter: $default-gutter, $header: ())
+  +border-radius
+  +box-shadow(0 0 1px rgba(#000, 0.5))
+  @if $single == false
+    $gutter-direction: opposite-position($direction)
+    +float($direction)
+    margin-#{$gutter-direction}: $gutter
+    
+  width: $width
+
+  > .header
+    @if $header != none
+      @if $header == headline
+        +headline-header
+      @else if $header == flat
+        +flat-header
+      @else
+        +pane-bar($header)
+  
+  &.my-card
+    > .footer
+      +pane-bar((footer, 0, 0, 24px))
+  &.modal.inner
+    > .footer
+      +pane-bar(("modal-footer", 0, 0, 60px))
+    form > .footer
+      +pane-bar(("modal-footer", 0, 0, 60px))
+  .is-mobile &
+    +border-radius(0px)
+  
+=game-nav-item($context: false, $selected:false)
+  @if $context != mobile
+    +link-colors($soft-copy, $hard-copy)
+    +text-shadow(0 1px 1px #000)
+    +typeface(sans)
+    position: relative
+    display: block
+    height: 32px
+    line-height: 32px
+    text:
+      decoration: none
+      transform: uppercase
+    
+  @if $context
+    @if $context == main
+      +transition
+      +background(linear-gradient(top, lighten($bar-grey-item, 16%), lighten($bar-grey-item, 4%) 50%, darken($bar-grey-item, 4%) 51%, $bar-grey-item 52%, $bar-grey-item))
+      +box-shadow(0 0 1px rgba(#000, 0.9) inset)
+      +border-radius
+      padding: 0 11px
+      border: 1px solid $bar-grey-item-outline
+      font-size: 20px
+      z-index: 3
+      .ie7 &,
+      .ie8 &
+        +background($bar-grey-item image-url('ui/chrome/legacy/gradients/app-nav-item.png') top left repeat-x)
+      &:hover
+        +background(linear-gradient(top, lighten($bar-grey-item-focus, 16%), lighten($bar-grey-item-focus, 2%) 50%, darken($bar-grey-item-focus, 1%) 51%, $bar-grey-item-focus 52%, $bar-grey-item-focus))
+        .ie7 &,
+        .ie8 &
+          +background($bar-grey-item image-url('ui/chrome/legacy/gradients/app-nav-item.png') bottom left repeat-x)
+          
+      &:after
+        +background(image-url('ui/chrome/app-nav-current-shim.png') no-repeat)
+        display: none
+        content: ""
+        position: absolute
+        left: 40.444455%
+        width: 18px
+        height: 9px
+        bottom: -7px
+        z-index: 4
+        
+    @if $selected
+      +background(linear-gradient(top, lighten($bar-grey-item-focus, 16%), lighten($bar-grey-item-focus, 2%) 50%, darken($bar-grey-item-focus, 1%) 51%, $bar-grey-item-focus 52%, $bar-grey-item-focus))
+      color: $hard-copy
+      .ie7 &,
+      .ie8 &
+        +background($bar-grey-item image-url('ui/chrome/legacy/gradients/app-nav-item.png') bottom left repeat-x)
+        
+      &:after
+        display: block
+          
+  @if $context == sub
+    font-size: 18px
+    line-height: 38px
+    
+  @if $context == stub
+    +background(image-url('ui/chrome/legacy/stub-back-button.png') no-repeat)
+    +box-shadow(none)
+    padding: 1px 5px 1px 11px
+    border: 0px
+    min-width: 103px
+    text-align: center
+    .borderimage &
+      +background(none)
+      padding: 0
+      border-width: 1px 5px 1px 11px
+      +border-image(image-url('ui/chrome/stub-back-button.png') 1 5 1 11)
+        
+  @if $context == mobile
+    +background(linear-gradient(top, lighten($list-item, 36%), $list-item))
+    +typeface(sans)
+    display: block
+    padding: 0 8px
+    font-size: 19px
+    height: 35px
+    line-height: 35px
+    border:
+      width: 0 1px 1px 0
+      style: solid 
+      color: darken($list-item, 2%)
+    text-align: center
+    text-transform: uppercase
+    color: $hard-copy
+    &:active
+      +background(linear-gradient(bottom, lighten($list-item, 36%), $list-item))
+    @if $selected
+      +box-shadow(0 -1px 0 $soft-copy inset)
+      +background(linear-gradient(top, $soft-copy, $hard-copy))
+      color: darken($list-item, 12%)
+      &:active
+        +background(linear-gradient(top, $soft-copy, $hard-copy))
+      
+=embedded-tool($context: default)
+  +clearfix
+  +background($sort-tools-filter)
+  +box-shadow(0 0 3px rgba(#000, 1) inset, 0 1px 0 $sort-tools-filter-highlight, 0 0 1px rgba(#000, 0.8))
+  +border-radius
+  padding: 3px 6px
+  border: 1px solid #000
+  .container
+    +background-clip(content-box)
+    +border-radius
+    +box-shadow(0 1px 0 #000, 0 2px 0 #000)
+    +float-left
+    border: 1px solid #000
+  
+  
+=button($type: default, $height: 45px, $font-size: 29px)
+  display: inline-block
+  text-decoration: none
+  @if $type == modal-button
+    +appearance(none)
+    +border-radius(3px)
+    +typeface(sans)
+    +background(linear-gradient(top, $bar-grey, darken($bar-grey, 8%)))
+    padding: 0px
+    display: block
+    font-size: 18px
+    text-align: center
+    line-height: 30px
+    height: 30px
+    border: 1px solid darken($bar-grey, 8%)
+    text-transform: uppercase
+    color: $hard-copy
+    box-sizing: border-box
+    -webkit-box-sizing: border-box
+    &:active
+      +background(linear-gradient(bottom, $bar-grey, darken($bar-grey, 8%)))
+    &:last-child
+      margin-left: 8px
+    &.single
+      margin-left: 0px
+  @if $type == action
+    +border-radius(3px)
+    +background(linear-gradient(top, #FDEA44, #C48F10))
+    +typeface(sans)
+    +text-shadow(0 1px 0 #fff)
+    padding: 0 5px
+    border: 1px solid #C48F10
+    font-size: $font-size
+    height: $height - 2
+    line-height: $height - 2
+    color: #333
+    text-transform: uppercase
+    .ie7 &,
+    .ie8 &
+      +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button.png') repeat-x)
+    &:hover
+      +background(linear-gradient(top, lighten(#FDEA44, 16%), saturate(#C48F10, 12%)))
+      .ie7 &,
+      .ie8 &
+        +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button.png') 0 -30px repeat-x)
+    &:active
+      +background(linear-gradient(bottom, #FDEA44, #C48F10))
+      +text-shadow(none)
+      .ie7 &,
+      .ie8 &
+        +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button.png') 0 -60px repeat-x)
+      
+    &[disabled]
+      +text-shadow(0 -1px 0 darken($bar-grey, 12%))
+      +background(linear-gradient(top, lighten($bar-grey, 32%), darken($bar-grey, 12%)))
+      cursor: default
+      border-color: darken($bar-grey-stub, 2%)
+      color: $flat-copy
+      .ie7 &,
+      .ie8 &
+        +background(darken($bar-grey, 12%) image-url('ui/chrome/legacy/gradients/action-button.png') 0 -90px repeat-x)
+      &:active,
+      &:hover
+        +background(linear-gradient(top, lighten($bar-grey, 32%), darken($bar-grey, 12%)))
+        .ie7 &,
+        .ie8 &
+          +background(darken($bar-grey, 12%) image-url('ui/chrome/legacy/gradients/action-button.png') 0 -90px repeat-x)
+          
+    &.large
+      .ie7 &,
+      .ie8 &
+        +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button-45.png') repeat-x)
+      &:hover
+        .ie7 &,
+        .ie8 &
+          +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button-45.png') 0 -45px repeat-x)
+      &:active
+        .ie7 &,
+        .ie8 &
+          +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button-45.png') 0 -90px repeat-x)
+          
+      &[disabled]
+        .ie7 &,
+        .ie8 &
+          +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button-45.png') 0 -135px repeat-x)
+          
+        &:active,
+        &:hover
+          .ie7 &,
+          .ie8 &
+            +background(#c48f10 image-url('ui/chrome/legacy/gradients/action-button-45.png') 0 -135px repeat-x)

@@ -1,0 +1,89 @@
+=consensus($context: false)
+  .consensus
+    &#consensus
+      padding-left: 20px
+    &.positions
+      +pane(202px, $single: true, $gutter: 0, $header: (dark, 16px 10px 0, 16px, 49px))
+      position: absolute
+      overflow: hidden
+      .list
+        &.positions
+          li
+            +list-item(reflective)
+            padding: 0px
+    &.my-card
+      +pane(202px, $single: true, $gutter: 0, $header: (normal, 11px 10px 0, 16px, 49px))
+      position: absolute
+      left: 222px
+      overflow: hidden
+      > .content
+        position: relative
+        height: auto
+        > ul
+          +border-bottom-radius
+        .positions
+          &.locked
+            position: absolute
+            top: 0px
+            left: 0px
+            padding: 3px
+            p
+              +border-top-radius(3px)
+              +text-shadow(0 1px 1px #000)
+              +background(linear-gradient(top, $bar-grey, $bar-grey 15%, rgba($bar-grey, 0)))
+              padding: 20px
+              height: 400px
+              line-height: 15px
+              font:
+                size: 12px
+                weight: bold
+              color: $soft-copy
+              text-align: center
+        
+    &.with-averages
+      position: absolute
+      width: 222px
+      overflow: hidden
+      
+      > .picks
+        position: relative
+        z-index: 1
+        overflow: hidden
+        > .content
+          overflow: hidden
+        
+      > .averages
+        position: absolute
+        top: 0
+        left: 0
+        width: 40px
+        z-index: 0
+        overflow: hidden
+        > .content
+          overflow: hidden
+          ul
+            li
+              &.average
+                +typeface(sans)
+                width: 40px
+          
+      &.users
+        left: 424px
+        > .picks
+          +pane(181px, $single: false, $direction: right, $gutter: 0, $header: (blue, 11px 10px 0, 16px, 49px))
+          +box-shadow(none)
+          +border-bottom-left-radius(0px)
+        > .averages
+          > .header
+            +pane-bar($attrs:(blue-alt, 16px 0 0 6px, 10px, 49px))
+      &.experts
+        left: 646px
+        margin-right:  0px
+        
+        > .picks
+          +pane(181px, $single: false, $direction: right, $gutter: 0, $header: (red, 6px 0 0, 16px, 49px))
+          +box-shadow(none)
+          +border-bottom-left-radius(0px)
+        > .averages
+          > .header
+            +pane-bar($attrs:(red-alt, 16px 0 0 6px, 10px, 49px))

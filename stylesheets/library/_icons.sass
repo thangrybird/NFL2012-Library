@@ -1,0 +1,131 @@
+// Icon Sprite categories
+// - Desktop
+// - iPad high-res
+// - Mobile low/high-res
+
+// Animated or multi sequence should be scoped to sti-hover, sti-focus etc.
+$low-res-icons: sprite-map("ui/chrome/icons/low/*.png")
+$high-res-icons-mobile: sprite-map("ui/chrome/icons/mobile/high/*.png")
+$low-res-icons-mobile: sprite-map("ui/chrome/icons/mobile/low/*.png")
+
+.has-icon
+  position: relative
+  .nfl &
+    .header
+      &.icon
+        +background(image-url('nfl/shield-37x37.png') center center no-repeat)
+  .sponsor &
+    +replace-text-with-dimensions('nfl/sponsor.png')
+    
+  &:before
+    content: ""
+    position: absolute
+    top: 0
+    width: 20px
+    height: 20px
+  &.search
+    &:before
+      +background(sprite($low-res-icons, "search") no-repeat)
+      top: 4px
+      right: 4px
+    .groups header &
+      &:before
+        top: 3px
+        left: 130px
+        
+  &.sti-focus
+    &:before
+      +background(sprite($low-res-icons, "search-focused") no-repeat)
+  &.add
+    padding-left: 25px !important
+    &:before
+      +background(sprite($low-res-icons, "add") no-repeat)
+      top: 5px
+      left: 2px
+      .is-mobile &
+        top: 3px
+    &.small
+      &:before
+        +background(sprite($low-res-icons, "add-small") no-repeat)
+        top: 2px
+        .is-mobile &
+          top: 3px
+  &.sti
+    +replace-text-with-dimensions('ui/chrome/powered.png')
+    
+  &.submit
+    padding: 0 25px 0 15px !important
+    &:before
+      +background($low-res-icons)
+      top: 11px
+      right: 2px
+      background-position: sprite-position($low-res-icons, "large-arrow")
+    &[disabled]
+      &:before
+        background-position: sprite-position($low-res-icons, "large-arrow-disabled")
+  &.next
+    padding-right: 25px
+    &:before
+      top: 9px
+      right: 0px
+      +background(sprite($low-res-icons, "pagination-arrow-right") no-repeat)
+    &.disabled
+      &:before
+        display: none
+  &.prev
+    padding-left: 25px
+    &:before
+      top: 9px
+      left: 0px
+      +background(sprite($low-res-icons, "pagination-arrow-left") no-repeat)
+    &.disabled
+      &:before
+        display: none
+  &.correct,
+  &.incorrect
+    > .content
+      padding-left: 20px !important
+  &.correct
+    > .content
+      +background(image-url("ui/chrome/icons/low/correct.png") center left no-repeat)
+      @media only screen and (-webkit-device-pixel-ratio: 2)
+        +background(image-url("ui/chrome/icons/mobile/high/correct.png") center left no-repeat)
+        +background-size(20px auto)
+  &.incorrect
+    > .content
+      +background(image-url("ui/chrome/icons/low/incorrect.png") center left no-repeat)
+      @media only screen and (-webkit-device-pixel-ratio: 2)
+        +background(image-url("ui/chrome/icons/mobile/high/incorrect.png") center left no-repeat)
+        +background-size(20px auto)
+a
+  &.link-out
+    +background(sprite($low-res-icons, "arrow") no-repeat)
+    background-position: right sprite-position-y($low-res-icons, arrow, -4px)
+    padding-right: 17px !important
+span
+  &.indicator
+    .is_saved &
+      +background(sprite($low-res-icons, "saved-pick") no-repeat)
+    .had_prospect_removed &,
+    .empty.is_saved &
+      +background(sprite($low-res-icons, "not-saved-pick") no-repeat)
+      
+.is-icon
+  +inline-block
+  width: 25px
+  height: 25px
+  text-indent: -9999px
+  overflow: hidden
+  @media screen and (-webkit-device-pixel-ratio: 2)
+    +background-size(25px auto)
+  &.add
+    +background(sprite($low-res-icons-mobile, "add") no-repeat)
+    &:hover,
+    &:active
+      background-position: sprite-position($low-res-icons-mobile, "add-active")
+    @media screen and (-webkit-device-pixel-ratio: 2)
+      +background($high-res-icons-mobile)
+      background-position: left #{sprite-position-y($high-res-icons-mobile, "add")/2}
+      &:hover,
+      &:active
+        background-position: left #{sprite-position-y($high-res-icons-mobile, "add-active")/2}

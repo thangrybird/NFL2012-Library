@@ -1,0 +1,142 @@
+// Library
+@import "library/init.mobile", "library/palette", "library/icons", "library/design", "library/typography", "library/teams"
+
+// Includes
+@import "includes/app.mobile", "includes/picks.mobile", "includes/consensus.mobile"
+// Canned animations
+@-webkit-keyframes slideinfromright
+  from
+    +transform(translateX(100%))
+  to
+    +transform(translateX(0))
+    
+@-webkit-keyframes slideouttoleft
+  from
+    +transform(translateX(0))
+  to
+    +transform(translateX(-100%))
+    
+@-webkit-keyframes slideinfromleft
+  from
+    +transform(translateX(-100%))
+  to
+    +transform(translateX(0))
+    
+@-webkit-keyframes slideouttoright
+  from
+    +transform(translateX(0))
+  to
+    +transform(translateX(100%))
+
+html,
+body
+  overflow-x: hidden
+
+.ui-loading
+  [data-role="page"]
+    opacity: 0.5
+    
+.sti-scrollable
+  +box-shadow(0 0 20px #000 inset, 0 3px 5px #000)
+  +background(#222)
+  min-height: 300px
+    
+// Animations
+// sliding elements    
+.slide
+  position: absolute
+  top: 0px
+  left: 0px
+  -webkit-backface-visibility: hidden
+  
+// animation sequences to element
+.to
+  &.slide
+    &.in
+      +transform(translateX(0))
+      -webkit-animation: slideinfromright 0.25s 1
+      &.reverse
+        +transform(translateX(100%))
+        -webkit-animation: slideouttoright 0.25s 1
+    
+.from
+  &.slide
+    &.out
+      +transform(translateX(-100%))
+      -webkit-animation: slideouttoleft 0.25s 1
+      &.reverse
+        +transform(translateX(0))
+        -webkit-animation: slideinfromleft 0.25s 1
+  
+      
+.csstransforms3d
+  .sti-scrollable
+    -webkit-backface-visibility: hidden
+    ul
+      li
+        +transform(translate3d(0,0,-100px))
+        -transform-style: preserve3d
+        -webkit-perspective: 1000
+        &.selected
+          +transform(translate3d(0,0,0))
+          
+.ui-loader
+  +box-shadow(none)
+  left: 30%
+  width: 120px
+  height: 120px
+  opacity: 1
+  .ui-loader-inner
+    +display-box
+    +box-orient(vertical)
+    +box-pack(center)
+    +box-align(center)
+    +background(#4c4c4c)
+    +box-shadow(0 1px 5px #333)
+    +border-radius
+    padding: 10px 10px
+    width: 120px
+    height: 120px
+    text-align: center
+    opacity: 1
+    .ui-icon-loading
+      +border-radius
+      +background(image-url('http://m.fantasy.nfl.com/static/img/loader_1301504950.gif') no-repeat)
+      +background-size(33px 33px)
+      display: inline-block
+      margin-bottom: 10px
+      width: 33px
+      height: 33px
+      opacity: 1
+    #{headings()}
+      font-weight: bold !important
+      color: $hard-copy
+      
+*
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  
+#ptp
+  +nested-reset
+  // RENDER APP (for mobile leaderboard and league views will be cosolidated into app)
+  +app
+  // RENDER PICKS
+  +picks
+  // RENDER CONSENSUS
+  +consensus
+  
+  
+#ptp
+  .locked
+    .list
+      li
+        &.standalone
+          &.team
+            > span.content
+              background-position: center right
+              padding-left: 0px
+              width: 196px !important
+              height: 51px !important
+              span
+                &.name
+                  padding-left: 7px

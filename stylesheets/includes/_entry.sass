@@ -1,0 +1,125 @@
+=entry($context: false)
+  .entry
+    &#my_entry
+      .sidebar &
+        +border-top-radius(5px)
+        margin-bottom: 10px
+        border: 1px solid darken($list-item-border, 4%)
+        .header
+          +pane-bar((alt, 0 9px 0 9px, 16px, 30px))
+          +border-top-radius(4px)
+          line-height: 30px
+          .title
+            #{headings()}
+              line-height: 30px
+              
+        .content
+          +background(linear-gradient(top, darken($list-item, 2%), darken($list-item, 4%)))
+          padding: 10px 8px 0
+          height: 58px
+          .link
+            +link-colors(lighten($d-blue, 8%), lighten($d-blue, 32%))
+            +typeface(sans)
+            display: block
+            font-size: 16px
+            line-height: 18px
+    &.bar
+      +clearfix
+      +panel
+      margin-bottom: 10px
+      .sti.entry.edit &
+        display: none
+      .bar
+        &.header
+          +float-left
+          +pane-bar($attrs: (entry-bar, 9px 10px 0 10px, 11px, 30px))
+          +border-bottom-left-radius
+          +border-top-right-radius(0px)
+
+          border-right: 1px solid #000
+          border-bottom-width: 0px !important
+          .title
+            +float-left
+            #{headings()}
+              +text-shadow(0 -1px 0 $grey-header)
+              &.sub
+                +float-left
+                margin-left: 8px
+          a
+            &.edit
+              +float-left
+              +button(action, 16px, 12px)
+              position: relative
+              top: -2px
+              margin-left: 8px
+              border-color: $grey-header
+            
+        &.content
+          +box-shadow(0 0 10px #000 inset)
+          +border-right-radius
+          +background(image-url('ui/chrome/texture/carbon.png'), linear-gradient(top, $grey-header, lighten($grey-header, 12%), lighten($grey-header, 12%), darken($grey-header, 8%),darken($grey-header, 8%) 15%, #101010))
+          padding: 3px 10px
+          height: 24px
+          line-height: 24px
+          .ie7 &,
+          .ie8 &
+            +background(#101010 image-url('ui/chrome/legacy/gradients/tools-carbon.png') repeat-x)
+          &.ad
+            +clearfix
+            padding: 0px
+            height: 38px
+            line-height: 38px
+            
+          .ad
+            &.header
+              +float-left
+              
+            &.header
+              #{headings()}
+                +typeface(sans)
+                display: inline
+                padding-left: 12px
+                font-size: 16px
+                text-transform: uppercase
+                color: $hard-copy
+                  
+            &.content
+              +float-right
+              +background(linear-gradient(top, lighten($d-blue, 20%), darken($d-blue-alt, 8%)))
+              border-left: 1px solid #000
+              width: 648px
+              .ie7 &,
+              .ie8 &
+                +background($d-blue-alt image-url('ui/chrome/legacy/gradients/prospect-dragging-helper.png') top left repeat-x)
+              .ad
+                +float(none)
+              .icon
+                +replace-text-with-dimensions('nfl/sbxlvii-ad.png')
+                display: inline-block
+                vertical-align: top
+              .copy
+                +text-shadow(0 -1px 0 $d-blue-alt)
+                +typeface(sans, bold)
+                font-size: 13px
+                color: $hard-copy
+              
+          .bar
+            &.inner
+              +clearfix
+              padding-left: 10px
+            &.stat
+              +embedded-tool
+              margin-right: 6px
+              line-height: 15px
+              height: 15px
+              overflow: hidden
+              .label,
+              .value
+                +typeface(sans, bold)
+                text-transform: uppercase
+              .label
+                color: $soft-copy
+              .value
+                padding: 0 6px
+                font-size: 14px
+                text-align: center

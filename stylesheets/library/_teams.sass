@@ -1,0 +1,22 @@
+$teams: (buf), (mia), (ne), (nyj), (bal), (cin), (cle), (pit), (den), (kc), (oak), (sd), (ten), (hou), (ind), (jac), (dal), (nyg), (phi), (was), (chi), (det), (gb), (min), (stl), (ari), (sf), (sea), (atl), (car), (no), (tb)
+
+@each $team in $teams
+  .team.#{$team}
+    .logo
+      &.full
+        &.helmet
+          +background(image-url('teams/full/helmets/#{$team}.png') -23px 44% no-repeat)
+        &.gem
+          +border-radius(3px)
+          +background(image-url('teams/full/gems/l/#{$team}.png') no-repeat)
+          width: 66px
+          height: 44px
+          @media screen and (-webkit-device-pixel-ratio: 2)
+            +background-size(66px 44px)
+            +background(image-url('teams/full/gems/h/#{$team}.png') no-repeat)
+      &.small
+        &.gem
+          +border-radius(3px)
+          +background(image-url('teams/s/gems/#{$team}.png') no-repeat)
+          width: 30px
+          height: 20px

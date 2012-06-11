@@ -1,0 +1,103 @@
+=leagues($context: false)
+  .leagues
+    &.wrapper
+      +float-left
+      position: relative
+      margin-right: 13px
+      width: 754px
+    &#my_leagues,
+    &#all_leagues,
+    &#league,
+    &#create_league
+      +pane($header: headline)
+      +box-shadow(none)
+    &#league
+      .content
+        &.header
+          +headline-header
+          #{headings()}
+            color: $flat-copy
+            
+    .trash-talker
+      &.content
+        padding: 0 6px 5px
+        > ul
+          +border-radius
+          border: 1px solid darken($bar-grey-stub, 2%)
+          overflow: hidden
+          li
+            +list-item
+            height: auto !important
+            &:first-child
+              +border-top-radius(4px)
+            &:last-child
+              +border-bottom-radius(4px)
+      &.message
+        padding: 0 6px 6px
+        .header
+          +typeface(sans)
+          padding-left: 4px
+          border-bottom: 1px solid darken($bar-grey-stub, 2%)
+          text-transform: uppercase
+          height: 30px
+          line-height: 30px
+          span
+            display: inline-block
+            &.author
+              margin-right: 6px
+              font-size: 20px
+              color: $hard-copy
+            &.time
+              font-size: 14px
+              color: $soft-copy
+        .content
+          +background($bar-grey-stub)
+          border-top: 1px solid darken($bar-grey, 4%)
+          p
+            padding: 6px 8px
+            font-size: 12px
+            line-height: 18px
+            font-weight: bold
+        &.empty
+          padding: 0px
+          font-size: 14px
+          font-weight: bold
+          text-align: center
+          color: $soft-copy
+          
+      &.create
+        +clearfix
+        margin-bottom: 8px
+        
+        textarea,
+        button
+          +float-left
+          
+        textarea
+          +box-shadow(0 0 3px darken($bar-grey-stub, 4%) inset)
+          +background($bar-grey-stub)
+          +appearance(none)
+          +border-radius
+          resize: none
+          margin-right: 7px
+          padding: 3px 6px
+          border: 1px solid darken($bar-grey-stub, 8%)
+          width: 668px
+          font-size: 13px
+          font-weight: bold
+          outline: none
+          height: 90px
+          color: $soft-copy
+          &:focus
+            +background(darken($bar-grey, 2%))
+          &::-webkit-input-placeholder
+            +typeface(sans)
+            font-size: 17px
+            color: $flat-copy
+          &:-moz-placeholder
+            +typeface(sans)
+            font-size: 17px
+            color: $flat-copy
+        button
+          +button(action, 30px, 22px)
+          cursor: pointer

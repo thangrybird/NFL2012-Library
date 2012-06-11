@@ -1,0 +1,99 @@
+=picks($context: false)
+  .picks
+    &#my_draft_card
+      +pane(100%, $header: (normal, 11px 10px 0, 16px, 49px))
+  .prospects
+    &#prospects
+      +pane(100%, $header: (normal, 11px 10px 0, 16px, 49px))
+      
+  .player.card
+    +border-radius(3px)
+    +box-shadow(0 3px 10px $bar-grey-stub)
+    +background(#e5e5e5)
+    position: absolute
+    left: 10px
+    width: 91%
+    border: 3px solid $hard-copy
+    z-index: 999
+    &:after
+      +background(image-url('ui/chrome/mobile/l/player-card-nub.png') no-repeat)
+      content: ""
+      position: absolute
+      left: 45.5%
+      top: -16px
+      width: 16px
+      height: 16px
+      @media screen and (-webkit-device-pixel-ratio: 2)
+        +background(image-url('ui/chrome/mobile/h/player-card-nub.png') no-repeat)
+        +background-size(16px auto)
+    .card
+      &.close
+        +background($hard-copy image-url('ui/chrome/mobile/l/close-x-large.png') center center no-repeat)
+        +border-left-radius(3px)
+        position: absolute
+        top: 0px
+        right: 0px
+        width: 22px
+        height: 22px
+        text-indent: -9999px
+        overflow: hidden
+        @media screen and (-webkit-device-pixel-ratio: 2)
+          +background($hard-copy image-url("ui/chrome/mobile/h/close-x-large.png") center center no-repeat)
+          +background-size(16px auto)
+      &.headshot
+        +box-shadow(0 5px 5px rgba($bar-grey-stub, 0.3))
+        +border-radius(3px)
+        margin-right: 5px
+        width: 90px
+        height: 110px
+        border: 2px solid #fff
+        overflow: hidden
+        img
+          display: block
+          width: 90px
+          height: 110px
+      &.row
+        +clearfix
+        &#player_content
+          position: relative
+          padding: 7px 7px 10px
+          .player
+            +typeface(sans)
+            color: $bar-grey-stub !important
+            #{headings()}
+              margin: 0
+              padding: 0
+            &.name
+              +ellipsis(true)
+              font-size: 25px
+              width: 174px
+              line-height: 28px
+              @media only screen (min-width: 321px)
+                width: 348px
+              &.sub
+                font-size: 17px
+                line-height: 21px
+                em
+                  +typeface(sans, bold)
+                
+        &#player_description
+          padding: 0 7px 7px
+          p
+            font-family: arial, helvetica, sans-serif
+            font-size: 13px
+            line-height: 15px
+            color: $bar-grey-stub
+            
+              
+      &.column
+        +float-left
+        &#player_title
+          padding-top: 24px
+    &.normal
+      top: 36px
+    &.reversed
+      top: 0
+      &:after
+        background-position: bottom left
+        top: auto
+        bottom: -16px

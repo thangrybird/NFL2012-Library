@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" class="ie ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" class="ie ie9"><![endif]-->   
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"><!--<![endif]--><head>
+      <title>NFL.com - STI NFL Library 2012</title>
+      <meta name="viewport" content="width=1024" />
+      <meta name="description" content="Are you a draft guru? Showcase your knowledge and predict the first 32 picks of the 2012 NFL Draft. You could win a trip to Super Bowl XLVII in New Orleans. Join for free today!" />
+      <meta property="og:image" content="http://i.imgur.com/vvmel.png" />
+      <meta property="og:title" content="NFL.com - Predict the Pick - 2012 NFL Draft" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="http://<%= request.host %>?campaign=Predict_Social_Share" />
+      <meta property="og:description" content="Are you a draft guru? Showcase your knowledge and predict the first 32 picks of the 2012 NFL Draft. You could win a trip to Super Bowl XLVII in New Orleans. Join for free today!" />
+	  
+	    <script type="text/javascript" src="http://stage.www.nfl.com/widget/partner/includes-2012"></script>	  
+	  
+	  
+	
+	    <script type="text/javascript">nfl.partner.createHead();</script>
+	    <link rel="image_src" href="http://i.imgur.com/5w8PI.gif" / >
+      <%= javascript_include_tag "vendor/modernizr" %>
+      <%= stylesheet_link_tag "site" %>
+      
+	    <link rel="shortcut icon" href="http://stage.i.nflcdn.com/static/site/4.1/img/favicon.png" type="image/png" />
+
+</head>
+<body id="com-nfl" class="header-2012 <%#= app_body_class %>">
+	<script type="text/javascript">nfl.partner.createHeader();</script>
+	<!--
+	
+	THIS IS WHERE YOUR AD GOES
+	
+	It's optional - you can use ours or replace it with your own.
+	
+	-->
+	<div id="page-top-ad">
+	  <%#= render :partial => 'ads/top_ad' %>
+	</div>
+	<!--
+	
+	THIS IS WHERE YOUR CONTENT STARTS
+	
+	These are wrapper classes for decoration, and can be removed if multiple content areas
+	need to float (a la NFL.com Game Center)
+	
+	-->
+	<div id="doc">
+	    <div id="ptp" class="app" role="main">
+        <section class="app wrapper">
+          <header class="app header">
+            <a href="/">
+              <h1>
+                <span class="app icon">NFL SEASON</span><span class="app title">Section name</span><span class="app game title">App Title</span>
+              </h1>
+            </a>
+            <a href="/" class="game app sponsor">
+              <span class="sponsor label">Presented By:</span>
+              <span class="sponsor has-icon gmc">GMC</span>
+            </a>
+          </header>
+        </section>
+        <nav class="app nav">
+          <ul id="main_nav" class="nav main">
+            <%= yield :app_main_nav %>
+          </ul>
+          <ul id="sub_nav" class="nav sub" role="sub navigation">
+            <%= yield :app_sub_nav %>
+          </ul>
+        </nav>
+        <section class="app wrapper">
+          <section class="app content">
+            <%#=render :partial => "entry/bar", :locals => {:entry => User.current.blank? ? 0 : @entry.id} %>
+            <%= yield %>
+            <footer class="app footer">
+              <%= link_to 'Powered By Sports Technologies', 'http://sportstechinc.com', :popup => 'true', :rel => 'sportstech', :class => 'has-icon sti' %>
+            </footer>
+          </section>
+        </section>
+        <div id="modal_container" class="app modal"></div>
+      </div>
+    </div>
+    <script src="http://google.com/jsapi"></script>
+    <script type="text/javascript" charset="utf-8">
+      google.load('jquery', 1);
+      google.load('jqueryui', 1);
+    </script>
+    <%#= javascript_include_tag "library/ptp" %>
+    <%#= javascript_include_tag "/javascripts/omniture.js" %>
+    <%#= javascript_include_tag "/javascripts/facebook-connect.js" %>
+    <script defer>
+      ptp.app.init();
+      window.fbAsyncInit = function() {
+        FB.Event.subscribe('edge.create', function(href, widget) {
+          // Do something, e.g. track the click on the "Like" button here
+          omnitureFunctions.before_fb_like();
+       });
+      };
+    </script>
+    <!-->
+    <script type="text/javascript">
+      Modernizr.load({
+        test: Modernizr.input.placeholder,
+        nope: ['<%#= javascript_path "vendor/jquery.placeholder.min.js" %>', '<%#= javascript_path "library/ie.polyfill.js" %>']
+      });
+    </script><!-->
+    <%= yield :inline_js %>
+	</div>
+	<!--
+	
+	THIS IS WHERE YOUR CONTENT ENDS
+	
+	-->
+	<script type="text/javascript">nfl.partner.createFooter();</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+@import "library/init", "library/palette", "library/icons", "library/design", "library/typography", "library/teams"
+
+// NFL.com Overrides bases on media query
+body
+  &.sti
+    +background(image-url('nfl/skin.jpg') 50% 185px no-repeat)
+    
+.sti
+  #event-header
+    margin-bottom: 0px
+    position: relative
+    
+// Overriden ad styles
+.ad
+  +float(none)
+  display: block
+  margin: 0
+  &.sidebar
+    margin-top: 5px
+  &.standalone
+    margin-top: 12px
+    a
+      display: block
+      img
+        display: block
+  &.column
+    margin-top: 8px
+  &.picks
+    +float-left
+    margin-top: 8px
+    height: 30px
+    a
+      display: block
+      height: 30px
+      img
+        display: block
+        
+    #notice &
+      +float-right
+      margin-top: 13px
+        
+// View partial stylesheets
+@import "includes/app", "includes/entry", "includes/picks", "includes/pages", "includes/consensus", "includes/leaderboard", "includes/leagues"
+
+// All styles that need to be scoped to PTP else, they're going to be on the main level above
+#ptp
+  color: $hard-copy
+  
+// BEGIN APP
++app
+// BEGIN ENTRY
++entry
+// BEGIN PICKS
++picks
+// BEGIN CONSENSUS
++consensus
+// BEGIN LEADERBOARD
++leaderboard
+// BEGIN LEAGUES
++leagues
+// BEGIN PAGES
++pages

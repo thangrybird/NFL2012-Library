@@ -1,0 +1,30 @@
+// Configure compass
+// Define some browser support here
+$experimental-support-for-opera: false
+$experimental-support-for-khtml: false
+$experimental-support-for-mozilla: false
+$experimental-support-for-microsoft: false
+$experimental-support-for-webkit: true
+
+// default gutter
+$default-gutter: 11px
+// border radius
+$default-border-radius: 5px
+
+// css3 transitions
+$default-transition-property: all
+$default-transition-duration: 0.25s
+$default-transition-function: ease
+
+// default font-family
+$default-font-family: arial, helvetica, sans-serif
+
+=user-select($select)
+  $select: unquote($select)
+  +experimental(user-select, $select, -moz, -webkit, not -o, not -ms, -khtml, official)
+
+// functions
+@import "functions"
+
+// Import compass && compass modules
+@import "compass"

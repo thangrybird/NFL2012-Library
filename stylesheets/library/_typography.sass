@@ -1,0 +1,22 @@
+=typeface($family: false, $style: normal)
+  // new var called-font == default-font-family if $family isn't defined
+  $called-font: $default-font-family
+  @if $family
+    @if $family == tech
+      @if $style == bold
+        $called-font: "NFLEndzoneTechBold"
+        // reset font-weight
+        $style: normal
+      @else
+        $called-font: "NFLEndzoneTechMedium"
+    @if $family == sans
+      @if $style == bold
+        $called-font: "NFLEndzoneSansBold"
+        // reset font-weight
+        $style: normal
+      @else
+        $called-font: "NFLEndzoneSansCondMedium"
+        
+        
+  font-family: $called-font
+  font-weight:  $style

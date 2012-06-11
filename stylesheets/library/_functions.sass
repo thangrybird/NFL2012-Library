@@ -1,0 +1,14 @@
+@function calculated-height($height, $padding)
+  $value: $height
+  @if $padding != 0  
+    $value: #{$height - $padding}
+  @else
+    $value: $value
+    
+  @return $value  
+
+@function sprite-position-x($map, $sprite, $offset-x: 0)
+  @return nth(sprite-position($map, $sprite, $offset-x, 0), 1)
+
+@function sprite-position-y($map, $sprite, $offset-y: 0)
+  @return nth(sprite-position($map, $sprite, 0, $offset-y), 2)

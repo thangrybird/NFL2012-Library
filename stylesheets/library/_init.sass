@@ -1,0 +1,29 @@
+// Configure compass
+// SVG gradients for IE9||> and Opera
+$experimental-support-for-svg: true
+// default gutter
+$default-gutter: 11px
+// border radius
+$default-border-radius: 5px
+
+// css3 transitions
+$default-transition-property: all
+$default-transition-duration: 0.25s
+$default-transition-function: ease
+
+// default font-family
+$default-font-family: arial, helvetica, sans-serif
+
+=user-select($select)
+  $select: unquote($select)
+  +experimental(user-select, $select, -moz, -webkit, not -o, not -ms, -khtml, official)
+
+// NFL FONTS
+@import "nfl.fonts.css"
+
+// functions
+@import "functions"
+
+// Import compass && compass modules
+@import "compass"
+@import "compass/reset"

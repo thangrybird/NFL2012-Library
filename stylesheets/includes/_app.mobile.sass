@@ -1,0 +1,815 @@
+=app($context: false)
+  .app
+    &.content
+      position: relative
+      min-height: 480px
+      .consensus &,
+      .view &
+        +panel
+        +border-radius(0px)
+        padding: 0px
+
+    &.panel
+      &.consensus
+        +box-shadow(0 0 5px #000)
+        +transition(-webkit-transform 0.45s ease-in)
+        position: relative
+        -webkit-backface-visibility: hidden
+        ul
+          li
+            -webkit-backface-visibility: hidden
+        .csstransforms3d &
+          +transform(translateZ(0))
+          -transform-style: preserve3d
+          -webkit-perspective: 1000
+        &.not-inited
+          +transform(translate(-300%, 0))
+          .csstransforms3d &
+            +transform(translate3d(-300%, 0, 0))
+                
+        &.is-viewing-my-card
+          +transform(translate(-202px, 0))
+          .csstransforms3d &
+            +transform(translate3d(-202px, 0, 0))
+        &.is-viewing-users-card
+          +transform(translate(-404px, 0))
+          .csstransforms3d &
+            +transform(translate3d(-404px, 0, 0))
+        &.is-viewing-experts-card
+          +transform(translate(-626px, 0))
+          .csstransforms3d &
+            +transform(translate3d(-626px, 0, 0))
+        
+    &.nav
+      ul
+        &#main_nav
+          +display-box
+          +box-orient(horizontal)
+          +box-pack(center)
+          +box-align(center)
+          border:
+            width: 2px 0
+            style: solid
+            color: darken($list-item, 12%)
+          border-top-color: darken($list-item, 2%)
+          li
+            +box-flex(1)
+            display: block
+            a
+              +game-nav-item(mobile)
+            
+            &#ptp_mock_drafts,
+            &#ptp_fan_ballot,
+            &.stub
+              display: none
+              
+            .ptp.picks.index &,
+            .ptp.picks.view &,
+            .ptp.mobile_picks.index &
+              &#ptp_picks_index
+                a
+                  +game-nav-item(mobile, true)
+                  
+            .ptp.picks.consensus &,
+            .ptp.mobile_picks.consensus &,
+            .ptp.mobile_picks.view &
+              &#ptp_consensus
+                a
+                  +game-nav-item(mobile, true)
+            
+            .ptp.picks.leaderboard &
+              &#ptp_leaderboard
+                a
+                  +game-nav-item(mobile, true)
+            
+            .ptp.groups.directory &,
+            .ptp.groups.view &,
+            .ptp.groups.create &
+              &#ptp_leagues
+                a
+                  +game-nav-item(mobile, true)
+                  
+            &:last-child
+              border-right: 0px
+        &#sub_nav
+          display: none
+
+  .list
+    list-style: none
+    ul
+      list-style: none
+    li
+      &.average
+        +list-item(is-average)
+    &.positions
+      li
+        +typeface(sans)
+        position: relative
+        padding: 0 7px
+        overflow: hidden !important
+        > span
+          position: relative
+          z-index: 1
+          &.ordinal
+            color: $soft-copy
+          &.name
+            font-size: 22px
+            text-transform: uppercase
+            color: $flat-copy
+          &.gem
+            vertical-align: middle
+            
+          &.shim
+            +background(linear-gradient(top, lighten($d-blue, 20%), $d-blue))
+            +transition(opacity 0.25s ease)
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            opacity: 0
+            pointer-events: none
+            z-index: 0
+
+        &.empty
+          +list-item
+          
+        &.standalone
+          +list-item(standard)
+          +typeface(sans)
+          .content
+            display: block
+            > span
+              &.name
+                font-size: 22px
+                color: $hard-copy
+              &.prospect
+                &.points
+                  +float(right)
+                  padding: 0 10px
+                  font-size: 17px
+                  text-transform: uppercase
+                  color: $hard-copy
+                  
+          &.team
+            > span
+              &.content
+                display: block
+                padding-left: 100px
+                span
+                  &.name
+                    text-transform: uppercase
+          
+        &.filled
+          +list-item(mobile-filled)
+          > span
+            &.name
+              color: $hard-copy
+        &.selected
+          > span
+            color: $hard-copy !important
+            &.shim
+              opacity: 1
+             
+    &.prospects
+      .name
+        width: 143px
+      .action
+        width: 32px
+        text-align: center
+      .rank
+        width: 23px
+      .college
+        width: 66px
+        @media only screen and (min-width: 321px)
+          width: 132px
+        
+      li
+        +typeface(sans)
+        +background(linear-gradient(top, $hard-copy, $soft-copy))
+        position: relative
+        height: 35px
+        line-height: 35px
+        border-bottom: 1px solid $flat-copy
+        color: $flat-copy
+        span
+          +inline-block
+          vertical-align: top
+          &.action
+            text-align: right
+            a
+              display: block
+              margin: 6px 0 0 6px
+              text-indent: 9999px
+          &.rank
+            +typeface(sans, bold)
+            text-align: center
+            font-size: 12px
+            color: $bar-grey-stub
+          &.name
+            font-size: 17px
+            text-transform: uppercase
+            color: #013369
+          &.college
+            +ellipsis(true)
+            font-size: 17px
+        &.disabled
+          +background(linear-gradient(top, darken($hard-copy, 4%), darken($soft-copy, 12%)))
+          border-bottom-color: darken($soft-copy, 16%)
+          span
+            &.action
+              a
+                display: none
+            &.rank
+              color: $flat-copy
+            &.name
+              color: darken($flat-copy, 8%)
+        &.selected
+          +background(linear-gradient(top, lighten($d-blue, 20%), $d-blue))
+          span
+            color: $hard-copy !important
+            
+        &:last-child
+          border-bottom-width: 0px
+      &.global
+        > .header
+          +background($bar-grey-highlight)
+          position: relative
+          .heading
+            &.action
+              text-indent: 9px
+          &:before
+            content: ""
+            position: absolute
+            top: 0px
+            left: 0px
+            width: 100%
+            border-top: 1px solid darken($bar-grey-highlight, 12%)
+          
+    &.global
+      width: 100%
+      border-collapse: separate
+      .header
+        .heading,
+        th
+          +background($bar-grey-highlight)
+          +typeface(sans)
+          border-top: 1px solid darken($bar-grey-highlight, 12%)
+          font-size: 15px
+          line-height: 22px
+          text-transform: uppercase
+          color: $hard-copy
+          &.rank
+            text-indent: -9999px
+            overflow: hidden
+          &.access,
+          &.rank-overall
+            text-align: center
+          &.users-count,
+          &.total-points
+            padding-left: 8px
+        .heading
+          +inline-block
+          
+      .content
+        .rank,
+        .entry,
+        .access,
+        .league,
+        .rank-overall
+          +list-item(standard)
+          border-bottom: 1px solid $list-item-border-highlight !important
+          
+        .total-points,
+        .users-count
+          +list-item(is-average)
+          +box-shadow(none)
+          border-top: 0px
+          border:
+            width: 0 1px 1px 0
+            style: solid
+            color: #000
+          border-bottom: 1px solid $list-item-border-highlight !important
+            
+        .rank,
+        .access,
+        .rank-overall
+          padding: 0
+          width: 65px
+          text-align: center
+          
+        .total-points,
+        .users-count
+          +typeface(sans)
+          padding-left: 8px
+          width: 108px
+          font-size: 16px
+          text-align: left
+          color: $hard-copy
+          
+          
+        tr
+          td
+            +typeface(sans)
+            font-size: 18px
+            a
+              +link-colors($soft-copy, $hard-copy)
+              +ellipsis(true)
+              display: block
+              width: 120px
+              
+            &.entry
+              color: $hard-copy
+                
+            &.rank
+              font-size: 13px
+          &:last-child
+            td
+              border-bottom-width: 0px
+  .tools
+    // Override UI
+    &.header
+      position: absolute
+      top: 4px
+      right: 5px
+      
+    .tool
+      &.action
+        +button(action, 27px, 19px)
+        vertical-align: middle
+        &.small
+          +button(action, 27px, 20px)
+    
+    #position_toggle
+      +typeface(sans)
+      +appearance(none)
+      +border-radius
+      +box-shadow(0 0 3px $bar-grey-stub)
+      +border-image(image-url("ui/chrome/mobile/h/select-box.png") 2 46 2 7)
+      +background-size(50% auto)
+      padding: 0 3px
+      font-size: 17px
+      max-width: 143px
+      line-height: 30px
+      height: 30px
+      border-width: 1px 23px 1px 4px
+      vertical-align:  middle
+      color: #333
+      text-align: center
+      text-transform: uppercase
+      -webkit-box-sizing: padding-box
+      &::-webkit-input-placholder
+        color: #000
+          
+    .tool
+      &.submit
+        +appearance(none)
+        +box-shadow(0 0 3px $bar-grey-stub, 0 1px 0 $soft-copy inset)
+        +background(linear-gradient(top, #B20011, #620003))
+        +border-radius
+        +typeface(sans)
+        font-size: 18px
+        height: 32px
+        border: 0
+        vertical-align: middle
+        text-transform: uppercase
+        color: $hard-copy
+        &:active
+          +box-shadow(none)
+          +background(linear-gradient(bottom, #B20011, #620003))
+        
+    &.prospects,
+    &.leagues
+      +background(linear-gradient(top, rgba(#fff, 0.2), rgba(#fff, 0.1) 50%, rgba(#fff, 0) 51%), linear-gradient(left, darken($grey-header, 16%), $grey-header, darken($grey-header, 16%)))
+      border-top: 1px solid lighten($grey-header, 24%)
+      border-bottom: 1px solid darken($grey-header, 20%)
+      line-height: 41px
+      height: 41px
+      text-align: center
+    &.leagues
+      +display-box
+      +box-pack(center)
+      +box-align(center)
+      padding: 3px 5px
+      height: 35px
+      line-height: 35px
+      .set
+        margin-right: 8px
+        &:last-child
+          margin-right: 0px
+      .league-tools
+        +box-flex(1)
+        +embedded-tool
+        display: block
+        padding: 3px 6px
+        .filter
+          +box-shadow(0 1px 0 $sort-tools-filter-item-off inset, 0 2px 0px #4f5152 inset, 0 -1px 0 darken($sort-tools-filter-item-off, 20%) inset, 0 -2px 0px #202020 inset)
+          +background(linear-gradient(top, $sort-tools-filter-item-off, darken($sort-tools-filter-item-off, 20%)))
+          +float-left
+          +transition
+          margin: 0
+          border:
+            width: 0 1px
+            style: solid
+          border-right-color: rgba(#000, 0.2)
+          border-left-color: rgba(#fff, 0.2)
+          line-height: 25px
+          a
+            +link-colors($soft-copy, $hard-copy)
+            +text-shadow(0 -1px 0 #000)
+            +typeface(sans)
+            display: block
+            padding: 0 9px
+            font:
+              size: 20px
+            text:
+              align: center
+              decoration: none
+              transform: uppercase
+          &.on
+            +box-shadow(0 1px 0 $sort-tools-filter-item-on inset, 0 2px 0px $sort-tools-filter-item-on-highlight inset, 0 -1px 0 darken($sort-tools-filter-item-on, 28%) inset, 0 -2px 0px $sort-tools-filter-item-on-shadow inset)
+            +background(linear-gradient(top, $sort-tools-filter-item-on, darken($sort-tools-filter-item-on, 28%)))
+            a
+              +text-shadow(0 -1px 0 #000)
+              color: #fff
+              
+          &:first-child
+            +border-left-radius(4px)
+
+          &:last-child
+            +border-right-radius(4px)
+            border-right-color: #3C3D3C
+            border-right-color: rgba(#fff, 0.2)
+          &:hover
+            @extend .filter.on
+        &.membership
+          height: 25px
+          line-height: 25px
+          input
+            +appearance(none)
+            &.password
+              +background(transparent)
+              +text-shadow(0 -1px 0 #000)
+              +typeface(sans)
+              padding: 1px 0px
+              font-size: 17px
+              width: 117px
+              border: 0px
+              text:
+                transform: uppercase
+              color: #fff
+              &:focus
+                +box-shadow(none)
+                +text-shadow(none)
+                outline: none
+              &::-webkit-input-placeholder
+                color: $sort-tools-filter-item-off-highlight
+              &:-moz-placeholder
+                color: $sort-tools-filter-item-off-highlight
+              &::-webkit-search-cancel-button
+                +appearance(none)
+          button
+            +button(action, 27px, 15px)
+            cursor: pointer
+  // Consensus
+  .consensus
+    &.draft-order
+      +box-shadow(2px 0 3px #000)
+      position: absolute
+      top: 0px
+      left: 0px
+      list-style: none
+      z-index: 999
+      .position
+        +background(linear-gradient(left, lighten($bar-grey, 12%), $bar-grey))
+        +display-box
+        +box-pack(center)
+        +box-align(center)
+        width: 20px
+        height: 52px 
+        border-bottom: 1px solid lighten($bar-grey, 20%)
+        span
+          &.ordinal
+            +box-flex(1)
+            +transform(rotate(90deg))
+            +typeface(sans, bold)
+            display: block
+            font-size: 13px
+            text-align: center
+            color: $hard-copy
+        &.header
+          +box-shadow(0 1px 0 $dark-grey-header-highlight inset)
+          +background(linear-gradient(top, $dark-grey-header, darken($dark-grey-header, 8%)))
+          border-width: 0px
+          height: 50px
+            
+  // Leaderboards
+  .leaderboard
+    &.overall
+      +pane(100%, $header: (normal, 10px 10px 0, 16px, 35px))
+  // Leagues
+  .leagues
+    &#my_leagues,
+    &#all_leagues,
+      +pane(100%, $header: (normal, 10px 10px 0, 16px, 35px))
+    &#league
+      +pane(100%, $header: headline)
+      .content
+        padding: 0 1px
+        &.header
+          +headline-header
+          #{headings()}
+            color: $flat-copy
+            
+    .trash-talker
+      &.content
+        padding: 0 6px 5px
+        > ul
+          +border-radius
+          border: 1px solid darken($bar-grey-stub, 2%)
+          overflow: hidden
+          li
+            +list-item(standard)
+            height: auto !important
+            &:first-child
+              +border-top-radius(4px)
+            &:last-child
+              +border-bottom-radius(4px)
+      &.message
+        padding: 0 6px 6px
+        .header
+          +typeface(sans)
+          padding-left: 4px
+          border-bottom: 1px solid darken($bar-grey-stub, 2%)
+          text-transform: uppercase
+          span
+            display: inline-block
+            &.author
+              margin-right: 6px
+              font-size: 20px
+              color: $hard-copy
+            &.time
+              font-size: 14px
+              color: $soft-copy
+        .content
+          +background($bar-grey-stub)
+          border-top: 1px solid darken($bar-grey, 4%)
+          p
+            padding: 6px 8px
+            font-size: 12px
+            line-height: 18px
+            font-weight: bold
+        &.empty
+          padding: 0px
+          font-size: 14px
+          font-weight: bold
+          text-align: center
+          color: $soft-copy
+
+      &.create
+        +clearfix
+        margin-bottom: 8px
+        .textarea-wrapper
+          +box-shadow(0 0 3px darken($bar-grey-stub, 4%) inset)
+          +background-clip(padding-box)
+          +border-top-radius
+          display: block
+          border:
+            width: 1px 1px 0
+            style: solid
+            color: darken($bar-grey-stub, 8%)
+          overflow: hidden
+            
+        textarea
+          +background(transparent)
+          +appearance(none)
+          +border-top-radius
+          +border-bottom-radius(0px)
+          display: block
+          resize: none
+          padding: 3px 0 3px 6px
+          font-size: 13px
+          width: 300px
+          font-weight: bold
+          border: 0px
+          outline: none
+          height: 90px
+          color: $soft-copy
+          -webkit-box-sizing: content-box
+          box-sizing: content-box
+          &:focus
+            +background(darken($bar-grey, 2%))
+          &::-webkit-input-placeholder
+            +typeface(sans)
+            font-size: 17px
+            color: $flat-copy
+          &:-moz-placeholder
+            +typeface(sans)
+            font-size: 17px
+            color: $flat-copy
+          @media only screen and (min-width: 321px)
+            width: 460px
+        footer
+          +background(darken($bar-grey-stub, 4%))
+          border-top: 2px solid darken($bar-grey-stub, 8%)
+          padding: 8px
+          button
+            +button(action, 30px, 22px)
+            display: block
+            width: 100%
+            cursor: pointer
+    &.panel
+      +panel
+      +border-radius(0px)
+            
+  // Notifications
+  .notification
+    .message
+      &.content
+        padding: 6px
+        p
+          font-size: 12px
+          font-weight: bold
+          text-align: center
+    &.locked
+      .message
+        &.content
+          p
+            +box-shadow(0 1px 0 #fff)
+            +text-shadow(0 1px 0 #000)
+            +border-radius
+            +background($bar-grey-stub)
+            padding: 6px 12px
+            color: $soft-copy
+    &#notice
+      &.error
+        p
+          +border-radius(3px)
+          +text-shadow(0 -1px 0 darken($nfl-red, 8%))
+          +background($nfl-red)
+          padding: 3px
+          color: $hard-copy
+          
+        a
+          +link-colors(lighten($d-blue, 20%), lighten($d-blue, 32%))
+          
+    &#comingsoon
+      +box-shadow(0 1px 0 lighten($bar-grey, 36%) inset)
+      +border-radius
+      +background(image-url('ui/chrome/mobile/l/reflective-shield.png') 10% center no-repeat, linear-gradient(top, lighten($bar-grey, 30%), $bar-grey))
+      margin: 5px
+      padding-left: 105px
+      min-height: 100px
+      border: 1px solid $bar-grey
+      @media only screen and (-webkit-device-pixel-ratio: 2)
+        +background(image-url('ui/chrome/mobile/h/reflective-shield.png') 10% center no-repeat, linear-gradient(top, lighten($bar-grey, 30%), $bar-grey))
+        +background-size(54px auto, 100% 100%)
+        
+      .message
+        padding: 10px 5px
+        &.header
+          padding: 0
+          margin-bottom: 10px
+          #{headings()}
+            +text-shadow(0 -1px 0 #000)
+            +typeface(tech, bold)
+            font-size: 19px
+            line-height: 21px
+            color: $hard-copy
+        &.content
+          padding: 0
+          p
+            +text-shadow(0 -1px 0 $bar-grey)
+            padding: 0
+            font-size: 13px
+            text-align: left
+            color: $soft-copy
+            
+            
+  // Pagination
+  .pagination
+    +background($panel)
+    ul
+      display: block
+      padding: 19px 0
+      height: 39px
+      line-height: 39px
+      text-align: center
+      li
+        +inline-block
+        &.divider
+          +background($soft-copy)
+          +border-radius(50%)
+          margin: 0 32px
+          width: 8px
+          height: 8px
+          font-size: 0px
+        &[rel="next"],
+        &[rel="previous"]
+          +typeface(sans)
+          font-size: 33px
+          text-transform: uppercase
+          color: $flat-copy
+          &.enabled
+            a
+              +link-colors($soft-copy, $hard-copy)
+              text-decoration: none
+          &.disabled
+            +user-select(none)
+            cursor: default
+      
+  .modal
+    &.container
+      +background(#333 !important)
+      position: absolute
+      width: 100%
+      .wrapper
+        +border-radius(3px)
+        +box-shadow(0 3px 10px #000)
+        +background(#e5e5e5)
+        position: relative
+        margin: 25px auto 0
+        width: 287px
+        border: 3px solid $hard-copy
+        text-align: left
+        
+    &.header
+      margin-bottom: 12px
+      padding: 12px 7px 0
+      #{headings()}
+        +typeface(tech, bold)
+        font-size: 19px
+        line-height: 23px
+        text-transform: uppercase
+        text-align: left
+        color: $bar-grey-stub
+        
+    &.content
+      p
+        padding: 0 12px 12px
+        font-size:  14px
+        line-height:  16px
+        color: $bar-grey
+    &.footer
+      +display-box
+      +box-orient(horizontal)
+      +box-pack(center)
+      +box-align(center)
+      +background(#CCCCCC)
+      padding: 11px 5px
+      border-top: 2px solid #BBBBBB
+      a
+        +box-flex(1)
+        +button(modal-button)
+      input[type="submit"],
+      button[type="submit"]
+        +box-flex(1)
+        +button(modal-button)
+        
+    &.close
+      +background($hard-copy image-url('ui/chrome/mobile/l/close-x-large.png') center center no-repeat)
+      +border-left-radius(3px)
+      position: absolute
+      top: 0px
+      right: 0px
+      width: 22px
+      height: 22px
+      text-indent: -9999px
+      overflow: hidden
+      @media screen and (-webkit-device-pixel-ratio: 2)
+        +background($hard-copy image-url("ui/chrome/mobile/h/close-x-large.png") center center no-repeat)
+        +background-size(16px auto)
+    &.form
+      p
+        border-bottom: 1px solid $soft-copy
+      .group
+        +box-shadow(0 1px 0 #fff inset)
+        display: block
+        padding: 12px 12px
+        border-bottom: 1px solid $soft-copy
+        label
+          +text-shadow(0 1px 0 #fff)
+          +typeface(sans, bold)
+          display: block
+          font-size: 13px
+          text-transform: uppercase
+          color: $flat-copy
+          line-height: 16px
+        input
+          padding: 4px 3px
+          width: 97%
+          font-size: 16px
+        &:last-child
+          border-bottom: 0px
+    &#create_league
+      border: 3px solid #fff
+      
+  // cascade dumbness    
+  .consensus.my-card
+    .list
+      li
+        &.standalone
+          +list-item(my-card-standalone)
+          padding: 0px
+          > .content
+            display: block
+            padding-left: 7px

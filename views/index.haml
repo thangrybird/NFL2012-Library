@@ -1,0 +1,60 @@
+%section.groups.directory
+  %section#leagues_directory.app.leagues.panel
+    .leagues.wrapper
+      %section#my_leagues.leagues
+        %header.leagues.header
+          %h1 My Leagues
+          %span.title.tools=link_to 'Start League', "#", :class => "tool action has-icon add"
+        
+        %section.leagues.content
+          %table.list.global(cellpadding="0" cellspacing="0")
+            %colgroup
+              %col.leagues.access
+              %col.leagues.league
+              %col.leagues.users-count
+            %thead.list.header
+              %tr
+                %th.leagues.access Access
+                %th.leagues.league League Name
+                %th.leagues.users-count # Users
+            %tbody.list.content
+              %tr
+                %td.leagues.access Private
+                %td.leagues.league STILLC
+                %td.leagues.users-count 10
+      
+      %section#all_leagues.leagues
+        %header.leagues.header
+          %h1 Leagues Directory
+          %span.title.tools
+            %nav.filter.search.has-icon(role="search")
+              %form
+                %input(type="text" class="search text" placeholder="SEARCH LEAGUES")
+                //%button.action.submit(type="submit") Search
+              
+        %section.leagues.content
+          %table.list.global(cellpadding="0" cellspacing="0")
+            %colgroup
+              %col.leagues.access
+              %col.leagues.league
+              %col.leagues.users-count
+            %thead.list.header
+              %tr
+                %th.leagues.access Access
+                %th.leagues.league League Name
+                %th.leagues.users-count # Users
+            %tbody.list.content
+              -10.times do |group|
+                %tr(class="public")
+                  %td.leagues.access Public
+                  %td.leagues.league=link_to "Group #{group}", "#"
+                  %td.leagues.users-count=rand(1000)
+              
+        %footer.leagues.footer
+          %nav.pagination
+            %ul(role="complimentary")
+              %li.has-icon.prev(rel="previous" class="disabled")>
+                Prev
+              %li.divider> &nbsp;
+              %li.has-icon.next(rel="next" class="disabled")>
+                Next

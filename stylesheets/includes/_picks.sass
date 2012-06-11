@@ -1,0 +1,321 @@
+=picks($context: false)
+  .picks
+    &.my-card
+      +pane(288px, $single: false, $direction: left, $header: (normal, 11px 10px 0, 16px, 49px))
+      > .content
+        > #positions_scroll_content
+          position: relative
+          height: 751px
+          overflow: -moz-scrollbars-vertical
+          overflow-x: hidden
+          overflow-y: scroll
+          -ms-overflow-x: hidden
+          -ms-overflow-y: scroll
+            
+          &::-webkit-scrollbar
+            +appearance(none)
+            +box-shadow(0 0 3px lighten($list-item, 4%) inset)
+            width: 9px
+          &::-webkit-scrollbar-track-piece
+            +border-radius(4px)
+            +box-shadow(0 0 5px rgba(#000, 0.5) inset, 0 -1px 0 lighten(#353535, 8%), 0 1px 0 darken(#353535, 12%))
+            +background(#353535)
+            &:vertical
+              &:start
+                margin-top: 5px
+              &:end
+                margin-bottom: 5px
+          &::-webkit-scrollbar-thumb
+            +border-radius(4px)
+            +box-shadow(0 0 5px rgba(#000, 0.5) inset)
+            +background(#696969)
+            margin: 5px
+          &::-webkit-scrollbar-thumb:hover
+            +background(lighten(#696969, 8%))
+            
+        .sti.picks.index &
+          position: relative
+          &:after
+            +background(linear-gradient(bottom, $list-item, rgba($list-item, 0)))
+            content: ""
+            position: absolute
+            left: 0px
+            bottom: 0px
+            width: 273px // width minus scrollbar
+            height: 55px
+            pointer-events: none
+            z-index: 1
+            .cssscrollbar &
+              width: 279px
+            .ie9.cssscrollbar &
+              width: 269px
+
+      &.is-editing
+        a
+          &.done-editing
+            +button(action, 14px, 15px)
+            vertical-align: middle
+      &.is-at-bottom-of-scroll
+        > .content
+          &:after
+            display: none
+            
+    &.prospects
+      +pane(642px, $single: false, $direction: left, $gutter: 0, $header: flat)
+      +box-shadow(none)
+      > .header
+        overflow: visible
+        .social
+          padding-top: 10px
+          right: 3px
+          line-height: 25px
+            
+      .prospects.card
+        +box-shadow(0 0 1px rgba(#000, 0.8))
+        +border-top-radius
+        +background($bar-grey-item)
+        height: 196px
+        > .card
+          +border-top-radius
+          +background(linear-gradient(top, lighten($bar-grey, 16%), darken($bar-grey, 8%) 80%, darken($bar-grey, 8%)))
+          border-top: 1px solid $bar-grey-highlight
+          height: 196px
+          .ie7 &,
+          .ie8 &
+            +background(darken($bar-grey, 8%) image-url('ui/chrome/legacy/gradients/player-card.png') repeat-x)
+          
+      .player
+        .card
+          &.row
+            +clearfix
+            padding: 17px 12px 0
+            &#player_description
+              padding-top: 5px
+              .player.description
+                font-size: 12px
+                color: $soft-copy
+                &.header
+                  margin-bottom: 3px
+                  #{headings()}
+                    font-weight: bold
+                &.content
+                  p
+                    line-height: 13px
+                &.footer
+                  a
+                    +link-colors($soft-copy, $hard-copy)
+                    +float-right
+                    font-size: 10px
+                    font-weight: bold
+                    text-transform: uppercase
+          &.column
+            +float-left
+            width: 528px
+            &.headshot
+              position: relative
+              margin-right: 9px
+              width: 81px
+              height: 110px
+              overflow: hidden
+              img
+                display: block
+                margin: 6px auto 0
+                width: 81px
+                .ie7 &,
+                .ie8 &
+                  -ms-interpolation-mode: bicubic
+                .ie7 &
+                  margin-top: 0px
+              &:before
+                +background(image-url('ui/chrome/player-card-headshot-frame.png') no-repeat)
+                content: ""
+                position: absolute
+                width: 100%
+                height: 100%
+              
+          &.header
+            +clearfix
+            position: relative
+            margin-bottom: 17px
+            width: 100%
+            #{headings()}
+              +typeface(sans)
+              +float-left
+              text-transform: uppercase
+            .player
+              &.name
+                margin-right: 10px
+                font-size: 45px
+                line-height: 35px
+                color: $hard-copy
+              &.position
+                font-size: 30px
+                line-height: 45px
+                color: $flat-copy
+              &.select
+                +button(action, 30px, 22px)
+                position: absolute
+                top: 0
+                right: 0
+                
+          &.content
+            +clearfix
+            .player
+              &.stat
+                +float-left
+                margin-right: 8px
+                width: 61px
+                .header,
+                .value
+                  display: block
+                  font-weight: bold
+                  text:
+                    align: center
+                .header
+                  +background(linear-gradient(top, lighten($bar-grey, 12%), lighten($bar-grey, 4%)))
+                  +border-top-radius
+                  font-size: 10px
+                  line-height: 19px
+                  text-transform: uppercase
+                  color: lighten($flat-copy, 12%)
+                  .ie7 &,
+                  .ie8 &
+                    +background(lighten($bar-grey, 4%) image-url('ui/chrome/legacy/gradients/player-card-stat.png') repeat-x)
+                .value
+                  +background(linear-gradient(top, lighten($bar-grey-stub, 8%), lighten($bar-grey-stub, 4%)))
+                  +border-bottom-radius
+                  font-size: 13px
+                  line-height: 30px
+                  height: 30px
+                  color: lighten($flat-copy, 20%)
+                  .ie7 &,
+                  .ie8 &
+                    +background(lighten($bar-grey, 4%) image-url('ui/chrome/legacy/gradients/player-card-stat.png') 0 -19px repeat-x)
+                &.college
+                  width: 187px
+                &.year
+                  width: 50px
+                &.conf
+                  margin-right: 0px
+                  width: 137px
+    &.footer
+      padding: 0 5px 0 0
+      height: 64px
+      a
+        &.submit
+          +float-right
+          +button(action, 45px, 29px)
+          margin-top: 21px
+        
+    &.tie-breaker
+      +float-left
+      .tie-breaker
+        &.header
+          .title
+            +clearfix
+            display: block
+            font-size: 11px
+            line-height: 22px
+            #{headings()}
+              +float-left
+              margin: 0 4px
+              font-weight: bold
+            .sub
+              +float-left
+              color: $soft-copy
+              
+        &.content
+          +embedded-tool
+          +clearfix
+          padding: 0px
+          width: 412px
+          height: 43px
+          .fields
+            +float-left
+          
+          .field-group
+            display: block
+            line-height: 21px
+            height: 21px
+            .field,
+            .label
+              +float-left
+              vertical-align: middle
+            .label
+              margin-right: 12px
+              width: 41px
+              font-size: 8px
+              color: $flat-copy
+              text-transform: uppercase
+              text-align: right
+            
+            .field
+              margin-top: 9px
+              select
+                display: none
+              .ui-slider
+                +background(darken($bar-grey-stub, 4%))
+                +box-shadow(0 1px 1px #000 inset)
+                +border-radius(3px)
+                padding: 1px
+                position: relative
+                display: block
+                width: 200px
+                height: 3px
+                cursor: pointer
+                .ie7 &,
+                .ie8 &
+                  +background(image-url('ui/chrome/legacy/gradients/slider-skin.png') no-repeat)
+                  
+                .ui-slider-range
+                  +box-shadow(0 1px 1px darken(#f9e54f, 40%) inset)
+                  +border-left-radius(2px)
+                  +background(#f9e54f)
+                  height: 3px
+                  .ie7 &,
+                  .ie8 &
+                    +background(image-url('ui/chrome/legacy/gradients/slider-skin.png') 0 -5px repeat-x)
+                .ui-slider-handle
+                  +background-clip(padding-box)
+                  +border-radius(50%)
+                  +background(image-url('ui/chrome/slider-handle.png') no-repeat)
+                  position: relative
+                  display: block
+                  margin-left: -8px
+                  top: -9px
+                  width: 16px
+                  height: 16px
+                  outline: none
+                  &.ui-state-active
+                    background-position: bottom left
+                    cursor: grabbing
+                    cursor: -moz-grabbing
+                    cursor: -webkit-grabbing
+                    .ie &
+                      cursor: url(https://mail.google.com/mail/images/2/closedhand.cur), default !important
+                      
+                &.ui-slider-sliding
+                  cursor: grabbing
+                  cursor: -moz-grabbing
+                  cursor: -webkit-grabbing
+                  .ie &
+                    cursor: url(https://mail.google.com/mail/images/2/closedhand.cur), default !important
+                      
+            &#tb_time_indicator
+              +box-shadow(0 0 5px #000 inset)
+              +background(darken($bar-grey-stub, 4%))
+              +float-right
+              padding: 0px
+              margin: 0px
+              width: 146px
+              height: 43px
+              line-height: 43px
+              text-align: center
+              span
+                +inline-block
+                +typeface(sans, bold)
+                font-size: 21px
+                color: $hard-copy
+                vertical-align: top
+            &:last-child
+              margin-bottom: 0px
